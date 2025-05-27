@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Failure Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    {% if prediction %}
+    <script>
+    Swal.fire({
+        title: "Prediction Result",
+        text: "{{ prediction }}",
+        icon: "success"
+    });
+    </script>
+    {% endif %}
+
+    <nav>
+        <ul>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/predict" class="active">Predict</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Heart Failure Prediction Form</h2>
+        <p>Enter the details below to predict the risk of heart failure.</p>
+
+        <form action="{{ url_for('predict') }}" method="POST">
+            <label>Enter Age:</label>
+            <input type="number" name="age" required>
+
+            <label>Anaemia (Yes/No):</label>
+            <select name="anaemia" required>
+                <option value="">-- Select --</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Enter Creatinine Phosphokinase:</label>
+            <input type="number" name="creatinine_phosphokinase" required>
+
+            <label>Diabetes (Yes/No):</label>
+            <select name="diabetes" required>
+                <option value="">-- Select --</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Ejection Fraction:</label>
+            <input type="number" name="ejection_fraction" required>
+
+            <label>Blood Pressure (Yes/No):</label>
+            <select name="high_blood_pressure" required>
+                <option value="">-- Select --</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Enter Platelets:</label>
+            <input type="number" name="platelets" required>
+
+            <label>Serum Creatinine:</label>
+            <input type="number" step="0.01" name="serum_creatinine" required>
+
+            <label>Serum Sodium:</label>
+            <input type="number" name="serum_sodium" required>
+
+            <label>Gender (Male/Female):</label>
+            <select name="sex" required>
+                <option value="">-- Select --</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label>Smoking (Yes/No):</label>
+            <select name="smoking" required>
+                <option value="">-- Select --</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label>Enter Serum Time (Days):</label>
+            <input type="number" name="time" required>
+
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+</body>
+</html>
